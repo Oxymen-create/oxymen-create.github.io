@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://oxymen-create.github.io/tech-outsourcing/sitemap.xml
