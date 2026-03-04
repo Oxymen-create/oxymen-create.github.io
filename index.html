@@ -448,6 +448,129 @@ body{ overflow-x: hidden; }
 @media (max-width: 520px){
   .logo-card{ width: 170px; height: 80px; }
 }
+  
+
+    /* ===== Lead modal + form (TechLine) ===== */
+    .modal{
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 999;
+      padding: 18px;
+    }
+    .modal.is-open{ display: grid; place-items: center; }
+    
+    .modal-backdrop{
+      position:absolute; inset:0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(8px);
+    }
+    
+    .modal-card{
+      position: relative;
+      width: min(720px, 100%);
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    
+    .modal-card::after{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(500px 220px at 15% 10%, rgba(110,168,255,.20), transparent 55%),
+        radial-gradient(500px 220px at 85% 40%, rgba(139,92,246,.16), transparent 55%);
+      pointer-events:none;
+      opacity:.95;
+    }
+    
+    .modal-body{
+      position: relative;
+      z-index: 1;
+      padding: 18px;
+    }
+    
+    .modal-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    
+    .modal-title{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: -.2px;
+    }
+    .modal-sub{
+      margin:6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    
+    .modal-close{
+      appearance:none;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: var(--shadow2);
+    }
+    .modal-close:hover{ background: rgba(255,255,255,.09); transform: translateY(-1px); }
+    
+    .lead-form{
+      display:grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    
+    .lead-form input,
+    .lead-form textarea{
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      padding: 12px 12px;
+      outline: none;
+      font-size: 14px;
+    }
+    
+    .lead-form textarea{ resize: vertical; min-height: 96px; }
+    
+    .lead-form input::placeholder,
+    .lead-form textarea::placeholder{ color: rgba(183,197,227,.75); }
+    
+    .lead-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      margin-top: 6px;
+    }
+    
+    .lead-actions .btn{ cursor:pointer; }
+    .lead-actions .btn{ border: 1px solid rgba(255,255,255,.14); }
+    
+    .lead-status{
+      margin: 6px 0 0;
+      color: rgba(231,238,252,.82);
+      font-size: 13px;
+    }
+    .lead-status.ok{ color: rgba(52,211,153,.95); }
+    .lead-status.err{ color: rgba(255,180,180,.95); }
+    
+    @media (max-width: 520px){
+      .modal-body{ padding: 14px; }
+      .lead-actions .btn{ width: 100%; }
+    }
   </style>
 
   <!-- ✅ JSON-LD: микроразметка (можешь позже добавить URL домена) -->
@@ -525,7 +648,7 @@ body{ overflow-x: hidden; }
         </p>
 
         <div class="hero-actions">
-          <a class="btn primary" href="#contact">Оставить заявку</a>
+          <a class="btn primary" href="#contact" data-open-lead>Оставить заявку</a>
           <a class="btn" href="#how">Как это работает</a>
         </div>
 
@@ -692,6 +815,7 @@ body{ overflow-x: hidden; }
 </div>
           <!-- ✅ КНОПКИ: две сверху одинаковые, снизу звонок по центру -->
           <div class="contact-actions">
+            <a class="btn primary" href="#contact" data-open-lead>Оставить заявку</a>
             <a class="btn" href="https://t.me/andreyrhr" target="_blank">Написать в Telegram</a>
             <a class="btn" href="mailto:techline037@gmail.com">Написать на почту</a>
             <div class="call-row">
@@ -738,6 +862,114 @@ body{ overflow-x: hidden; }
       </div>
     </footer>
   </div>
+
+
+
+  <!-- ===== Lead modal (Formspree) ===== -->
+  <div class="modal" id="leadModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+  
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+      <div class="modal-body">
+        <div class="modal-top">
+          <div>
+            <h3 class="modal-title" id="leadTitle">Оставить заявку</h3>
+            <p class="modal-sub">Если телефон недоступен — оставьте контакт, мы перезвоним.</p>
+          </div>
+          <button class="modal-close" type="button" data-close-modal>✕</button>
+        </div>
+  
+        <form class="lead-form" id="leadForm"
+              action="https://formspree.io/f/mreanlew"
+              method="POST">
+  
+          <input type="text" name="name" placeholder="Ваше имя" required>
+          <input type="tel" name="phone" placeholder="Телефон" required>
+          <textarea name="message" placeholder="Коротко опишите задачу (адрес/объект/что случилось)"></textarea>
+  
+          <!-- антиспам -->
+          <input type="text" name="_gotcha" style="display:none">
+  
+          <div class="lead-actions">
+            <button class="btn primary" type="submit">Отправить</button>
+            <button class="btn" type="button" data-close-modal>Закрыть</button>
+          </div>
+  
+          <p class="lead-status" id="leadStatus"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // ===== Lead modal logic =====
+    const leadModal = document.getElementById('leadModal');
+    const leadForm = document.getElementById('leadForm');
+    const leadStatus = document.getElementById('leadStatus');
+  
+    function openLeadModal(){
+      leadModal.classList.add('is-open');
+      leadModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      const first = leadForm.querySelector('input[name="name"]');
+      if(first) first.focus();
+    }
+  
+    function closeLeadModal(){
+      leadModal.classList.remove('is-open');
+      leadModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      leadStatus.textContent = '';
+      leadStatus.className = 'lead-status';
+    }
+  
+    document.addEventListener('click', (e) => {
+      const openBtn = e.target.closest('[data-open-lead]');
+      if(openBtn){
+        e.preventDefault();
+        openLeadModal();
+        return;
+      }
+      const closeBtn = e.target.closest('[data-close-modal]');
+      if(closeBtn){
+        e.preventDefault();
+        closeLeadModal();
+      }
+    });
+  
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && leadModal.classList.contains('is-open')){
+        closeLeadModal();
+      }
+    });
+  
+    leadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      leadStatus.textContent = 'Отправляю…';
+      leadStatus.className = 'lead-status';
+  
+      try{
+        const res = await fetch(leadForm.action, {
+          method: 'POST',
+          body: new FormData(leadForm),
+          headers: { 'Accept': 'application/json' }
+        });
+  
+        if(res.ok){
+          leadForm.reset();
+          leadStatus.textContent = 'Готово! Заявка отправлена. Мы свяжемся с вами.';
+          leadStatus.className = 'lead-status ok';
+          setTimeout(closeLeadModal, 1200);
+        }else{
+          leadStatus.textContent = 'Не отправилось. Попробуйте ещё раз или напишите в Telegram.';
+          leadStatus.className = 'lead-status err';
+        }
+      }catch(err){
+        leadStatus.textContent = 'Нет связи. Попробуйте позже или напишите в Telegram.';
+        leadStatus.className = 'lead-status err';
+      }
+    });
+  </script>
 
 </body>
 </html>
