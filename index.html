@@ -557,6 +557,88 @@ body{ overflow-x: hidden; }
       .modal-body{ padding: 14px; }
       .lead-actions .btn{ width: 100%; }
     }
+  
+    /* ===== SEO text block + FAQ ===== */
+    .seo{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){ .seo{ grid-template-columns: 1fr; } }
+
+    .seo .seo-main h3{margin:0 0 10px; font-size:18px; letter-spacing:-.2px}
+    .seo .seo-main p{margin:0 0 10px; color:var(--muted); font-size:14px; line-height:1.65}
+    .seo .seo-main p:last-child{margin-bottom:0}
+
+    .seo .seo-side{
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: var(--shadow2);
+    }
+    .seo .seo-side h4{margin:0 0 10px; font-size:14px; letter-spacing:.2px}
+    .seo .seo-side ul{margin:0; padding:0 0 0 18px; color:var(--muted); font-size:14px; line-height:1.6}
+    .seo .seo-side li{margin:6px 0}
+
+    .faq{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 980px){ .faq{ grid-template-columns: 1fr; } }
+
+    .qa{
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      padding: 0;
+      overflow:hidden;
+      box-shadow: var(--shadow2);
+    }
+    .qa summary{
+      list-style:none;
+      cursor:pointer;
+      padding:14px 14px;
+      font-weight:900;
+      color: rgba(231,238,252,.95);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .qa summary::-webkit-details-marker{ display:none; }
+    .qa summary .q{
+      font-size:14px;
+      line-height:1.35;
+    }
+    .qa summary .chev{
+      flex: 0 0 auto;
+      width: 22px;
+      height: 22px;
+      border-radius: 10px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      color: rgba(231,238,252,.9);
+      transform: translateY(1px);
+      transition: transform .15s ease, background .15s ease;
+    }
+    .qa[open] summary .chev{
+      transform: rotate(45deg);
+      background: rgba(255,255,255,.10);
+    }
+    .qa .a{
+      padding: 0 14px 14px;
+      color: var(--muted);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .qa .a p{margin:0}
+
   </style>
 <!-- ✅ JSON-LD: микроразметка (можешь позже добавить URL домена) -->
 <script type="application/ld+json">
@@ -749,6 +831,88 @@ body{ overflow-x: hidden; }
 <!--<div class="mini" style="margin-top:10px;">При необходимости предоставим подтверждение опыта и перечень типовых работ.</div>-->
 </section>
 </div>
+
+<!-- =========================
+       SEO TEXT + FAQ
+       ========================= -->
+<div class="wrap" id="seo-text">
+<section>
+  <div class="section-title">
+    <h2>Техническое обслуживание ресторанов в Иваново</h2>
+    <p>Плановое ТО и оперативный ремонт инженерных систем и оборудования кухни — чтобы заведение работало стабильно.</p>
+  </div>
+
+  <div class="panel seo">
+    <div class="seo-main">
+      <h3>Инженерные системы и оборудование — под контролем</h3>
+      <p>
+        TechLine — техслужба для ресторанов, кафе, баров и коммерческих объектов в Иваново.
+        Берём на себя обслуживание электрики, сантехники, отопления и водоснабжения, вентиляции, а также холодильного и теплового оборудования кухни.
+      </p>
+      <p>
+        Делаем диагностику, устраняем неисправности, проводим регламентное обслуживание и профилактику.
+        Регулярное ТО снижает риск аварий и простоев, помогает держать оборудование в рабочем состоянии и планировать расходы.
+      </p>
+      <p>
+        Работаем официально: договор, счёт, документы. По заявкам — понятные сроки и прозрачная коммуникация.
+      </p>
+    </div>
+
+    <aside class="seo-side" aria-label="Что мы обслуживаем">
+      <h4>Какие объекты и направления</h4>
+      <ul>
+        <li>рестораны, кафе, бары, кофейни, dark kitchen</li>
+        <li>электрика и автоматика, щиты, локальные неисправности</li>
+        <li>водоснабжение, канализация, отопление</li>
+        <li>холодильное и тепловое оборудование кухни</li>
+        <li>базовая IT‑поддержка и серверное оборудование</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+</div>
+
+<div class="wrap" id="faq">
+<section>
+  <div class="section-title">
+    <h2>FAQ</h2>
+    <p>Коротко отвечаем на частые вопросы — чтобы было понятно, как мы работаем и чего ожидать.</p>
+  </div>
+
+  <div class="faq">
+    <details class="qa">
+      <summary><span class="q">Можно ли вызвать специалиста срочно?</span><span class="chev">+</span></summary>
+      <div class="a"><p>Да. Для аварийных ситуаций возможен оперативный выезд на диагностику и устранение неисправности.</p></div>
+    </details>
+
+    <details class="qa">
+      <summary><span class="q">Какие системы и оборудование вы обслуживаете?</span><span class="chev">+</span></summary>
+      <div class="a"><p>Электрика, сантехника, отопление/вода, холодильное и тепловое оборудование кухни, базовая IT‑поддержка.</p></div>
+    </details>
+
+    <details class="qa">
+      <summary><span class="q">Как формируется стоимость?</span><span class="chev">+</span></summary>
+      <div class="a"><p>Сначала диагностика и план работ. До начала ремонта согласовываем объём, материалы и стоимость — без сюрпризов.</p></div>
+    </details>
+
+    <details class="qa">
+      <summary><span class="q">Можно ли заключить договор на обслуживание?</span><span class="chev">+</span></summary>
+      <div class="a"><p>Да. Работаем официально: договор/счёт/закрывающие документы.</p></div>
+    </details>
+
+    <details class="qa">
+      <summary><span class="q">Что лучше писать в заявке?</span><span class="chev">+</span></summary>
+      <div class="a"><p>Адрес, тип объекта, какие услуги интересуют, контактные данные.</p></div>
+    </details>
+
+    <details class="qa">
+      <summary><span class="q">Какие договора вы заклюаете?</span><span class="chev">+</span></summary>
+      <div class="a"><p>Договор на технические, регламетное и аварийное облуживание. Договор на проведение разовых работ.</p></div>
+    </details>
+  </div>
+</section>
+</div>
+
 <!-- =========================
        CONTACT
        ========================= -->
