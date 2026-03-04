@@ -176,8 +176,8 @@
     }
     .panel > *{position:relative; z-index:1}
     .panel h3{margin:0 0 10px; font-size:16px; letter-spacing:.2px}
-    .facts{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
-    .fact{background: rgba(0,0,0,.18); border:1px solid rgba(255,255,255,.10); border-radius: 16px; padding:12px}
+    .facts{display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:12px; grid-auto-rows:1fr; align-items:stretch}
+    .fact{background: rgba(0,0,0,.18); border:1px solid rgba(255,255,255,.10); border-radius: 16px; padding:12px; height:100%; display:flex; flex-direction:column}
     .fact b{display:block; font-size:14px; margin-bottom:6px}
     .fact span{color:var(--muted); font-size:13px; line-height:1.35}
     .pill{display:inline-flex; gap:8px; flex-wrap:wrap; margin-top:14px}
