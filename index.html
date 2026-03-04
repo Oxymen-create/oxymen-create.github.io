@@ -571,6 +571,25 @@ body{ overflow-x: hidden; }
       .modal-body{ padding: 14px; }
       .lead-actions .btn{ width: 100%; }
     }
+    /* Контакты: 4 кнопки 2×2 */
+.contact-actions.contact-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* чтобы кнопки в сетке занимали ячейку, а не тянулись “как попало” */
+.contact-actions.contact-grid .btn{
+  width: 100%;
+  justify-content: center;
+}
+
+/* на узких экранах — в одну колонку */
+@media (max-width: 520px){
+  .contact-actions.contact-grid{
+    grid-template-columns: 1fr;
+  }
+}
   </style>
 
   <!-- ✅ JSON-LD: микроразметка (можешь позже добавить URL домена) -->
@@ -813,19 +832,17 @@ body{ overflow-x: hidden; }
     153000, Иваново, Варенцовой 9/18
   </a>
 </div>
-          <!-- ✅ КНОПКИ: две сверху одинаковые, снизу звонок по центру -->
+          <!-- ✅ КНОПКИ: две сверху одинаковые, две снизу -->
           <div class="contact-actions">
             <a class="btn primary" href="#contact" data-open-lead>Оставить заявку</a>
             <a class="btn" href="https://t.me/andreyrhr" target="_blank">Написать в Telegram</a>
             <a class="btn" href="mailto:techline037@gmail.com">Написать на почту</a>
-            <div class="call-row">
-              <a class="btn primary" href="tel:+79158140200">Позвонить</a>
+            <a class="btn primary" href="tel:+79158140200">Позвонить</a>
             </div>
           </div>
 
           <div class="mini">Для ускорения: в сообщении укажите адрес, тип объекта и кратко проблему.</div>
         </div>
-
         <div class="box">
   <h3>Принципы работы</h3>
   <div class="kpi">
